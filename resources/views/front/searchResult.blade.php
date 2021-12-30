@@ -9,13 +9,29 @@ use SongShare\Http\Controllers\FrontController;
 {{ trans('labels.siteTitle') }}
 @endsection
 
+@section('datatable')
+<script type="text/javascript" class="init">
+
+            $(document).ready(function () {
+                $('#example').DataTable(
+                {
+                    'scrollY' : 200,
+                    'scrollCollapse' : true,
+                    'processing' : true,                    
+                });
+            });
+
+        </script>
+@endsection
+
 @section('corpo')
 <div class='container'>
-    <form class="navbar-form navbar-left" method="get" action="{{ route('searchResult') }}">
+    <form class="navbar-form navbar-left" name="search" method="get" action="{{ route('searchResult') }}">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" name="search">
+            <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput">
         </div>
-        <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'aria-hidden="true"></span></button>
+        <button type="submit" onclick="event.preventDefault(); checkSearch()" class="btn btn-default"><span class='glyphicon glyphicon-search'aria-hidden="true"></span></button>
+        <span class="invalid-input" id="invalid-search"></span>
     </form>
 </div>
 <!-- Search Results -->
@@ -29,7 +45,7 @@ use SongShare\Http\Controllers\FrontController;
         </header>
         </div>
         <div class="col-md-12">
-            <table class="table table-striped table-hover table-responsive" style="width:100%">
+            <table id="example" class="table table-striped table-hover table-responsive" style="width:100%">
                 <col width='20%'> <!-- title -->
                 <col width='20%'> <!-- author -->
                 <col width='40%'> <!-- feat -->

@@ -132,12 +132,14 @@ class SongController extends Controller {
     public function ajaxCheckForSong(Request $request){
         // {'found':true/false}
         $dl = new DataLayer();
-        if($dl->findSongByGeneralities($request->input('title'), $request->input('author'), $request->input('feat'), $request->input('genre'))){
-            $response = array('found' => true);
-        }else{
+        $songs = $dl->findSongByFields($request->input('title'), $request->input('author'), $request->input('feat'), $request->input('genre'));
+        if($songs->isEmpty()){
             $response = array('found' => false);
+        }else{
+            $response = array('found' => true);
         }
         return response()->json($response);
+        
     }
 
 }

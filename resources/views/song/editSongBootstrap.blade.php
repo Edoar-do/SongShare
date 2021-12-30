@@ -14,7 +14,7 @@
         <div class='col-md-12'>
             @if(isset($song->id))
                 <header class='header-sezione'><h2> @lang('labels.editSongForm')</h2></header>
-                <form class="form-horizontal" name="song" method="get" action="{{ route('song.update', ['id' => $song->id]) }}">
+                <form class="form-horizontal" name="song"  method="get" action="{{ route('song.update', ['id' => $song->id]) }}">
             @else
                 <header class='header-sezione'><h2> @lang('labels.addSongForm')</h2></header>
                 <form class="form-horizontal" name="song" method="post" action="{{ route('song.store') }}">
@@ -84,6 +84,7 @@
                         <label for="mySubmit" class="btn btn-primary btn-large btn-block"><span class="glyphicon glyphicon-floppy-save"></span> {{ trans('labels.create') }}</label>
                         <input id="mySubmit" type="submit" value="Create" class="hidden" onclick="event.preventDefault(); checkSong('Create')"/>
                         @endif
+                        <span class="invalid-input" id="existingSong"></span>
                     </div>
                 </div>
                 <div class="form-group">

@@ -8,11 +8,29 @@ use SongShare\Http\Controllers\FrontController;
 {{ trans('labels.siteTitle') }}
 @endsection
 
+@section('datatable')
+<script type="text/javascript" class="init">
+
+            $(document).ready(function () {
+                $('table').DataTable(
+                {
+                    'scrollY' : 200,
+                    'scrollCollapse' : true, 
+                    'info' : false,
+                    'processing' : true,
+                    'paging' : false
+                    
+                });
+            });
+
+        </script>
+@endsection
+
 @section('corpo')
 <div class='container'>
-    <form class="navbar-form navbar-left" method="get" action="{{ route('searchResult') }}">
+    <form class="navbar-form navbar-left" name="search" method="get" action="{{ route('searchResult') }}">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+            <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput">
         </div>
         <button type="submit" class="btn btn-default" onclick="event.preventDefault(); checkSearch()"><span class='glyphicon glyphicon-search'aria-hidden="true"></span></button>
         <span class="invalid-input" id="invalid-search"></span>

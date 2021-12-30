@@ -4,12 +4,37 @@
 {{ trans('labels.siteTitle') }}
 @endsection
 
+@section('datatable')
+<script type="text/javascript" class="init">
+
+            $(document).ready(function () {
+                $('#userSongsTable').DataTable(
+                {
+                    'scrollY' : 200,
+                    'scrollCollapse' : true, 
+                    'processing' : true
+                    
+                });
+                
+                $('#user3MostLikedSongsTable').DataTable({
+                    'scrollY' : 200,
+                    'scrollCollapse' : true,
+                    'paging': false,
+                    'info' : false,
+                    'searching' : false,
+                    'processing' : true
+                });
+            });
+
+        </script>
+@endsection
+
 @section('corpo')
 <div class="container">
     <div class="row">
         <div class="col-md-offset-10 col-xs-6">
             <p>
-                <br><a class="btn btn-success" href="{{ route('song.create') }}"><span class="glyphicon glyphicon-new-window"></span> {{ trans('labels.createNewSong') }}</a>
+                <br><a class="btn btn-success" href="{{ route('song.create') }}"><span class="glyphicon glyphicon-plus"></span> {{ trans('labels.createNewSong') }}</a>
             </p>
         </div>
     </div>
@@ -21,7 +46,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <table class="table table-striped table-hover table-responsive" style="width:100%">
+            <table id="userSongsTable" class="table table-striped table-hover table-responsive" style="width:100%">
                 <col width='15%'> <!-- titolo -->
                 <col width='15%'> <!-- autore -->
                 <col width='30%'> <!-- feat -->
@@ -72,7 +97,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <table class="table table-striped table-hover table-responsive" style="width:100%">
+            <table id='user3MostLikedSongsTable' class="table table-striped table-hover table-responsive" style="width:100%">
                 <col width='15%'> <!-- titolo -->
                 <col width='15%'> <!-- autore -->
                 <col width='30%'> <!-- feat -->

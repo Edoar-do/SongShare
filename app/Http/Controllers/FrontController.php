@@ -26,7 +26,7 @@ class FrontController extends Controller
     
     public function getSearchResult(Request $request){
         $dl = new DataLayer();
-        $search = $request->input('search');
+        $search = $request->input('searchInput');
         if(empty($search)){
             $result = array();
         }else{
@@ -45,5 +45,17 @@ class FrontController extends Controller
     public static function checkAlreadyLiked($song_id){
         $dl = new DataLayer();
         return ($dl->findLike($song_id)->isEmpty())? true : false;        
+    }
+    
+    public function ajaxCheckSearch(Request $request){
+        $dl = new DataLayer();
+        $search = $request->input('search');
+        $result = $dl->findSongByTitle($search)->union($dl->findSongByAuthor($search))->union($dl->findSongByFeat($search));
+        if($result->isEmpty()){
+            $response = array('found' => false);
+        }else{
+            $response = array('found' => true);
+        }
+        return response()->json($response);
     }
 }

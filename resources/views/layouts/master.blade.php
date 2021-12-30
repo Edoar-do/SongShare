@@ -13,6 +13,9 @@
         <script src="http://code.jquery.com/jquery.js"></script>
         <script src="{{ url('/') }}/js/bootstrap.min.js"></script>
         <script src="{{ url('/') }}/js/myScript.js"></script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+        @yield('datatable')
     </head>
 
     <body>

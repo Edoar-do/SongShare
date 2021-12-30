@@ -32,6 +32,8 @@ Route::group(['middleware' => ['lang']], function () {
 //    Route::post('/user/register', ['as' => 'user.register',
 //        'uses' => 'AuthController@registration']);
     Auth::routes();
+    
+    Route::get('/ajaxSearch', 'FrontController@ajaxCheckSearch');
 });
 
 // Authentication Routes...
@@ -64,6 +66,6 @@ Route::group(['middleware' => ['auth','lang']], function () {
     Route::get('/searchResult/{id}/{up_down?}', ['as' => 'song.likeOrDislike', 'uses' => 'SongController@likeOrDislike']);
 
     Route::get('/ajaxSong', 'SongController@ajaxCheckForSong');
-    //probabilmente manca una rotta che punta a /ajax
+    
 });
 
