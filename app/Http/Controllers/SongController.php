@@ -20,19 +20,19 @@ class SongController extends Controller {
         $threeMostLikedSongs = $dl->listUser3MostLikedSongs($userID);
         return view('song.songsBoostrap')->with('songList', $songs_list)->with('threeMostLikedSongs', $threeMostLikedSongs);
     }
-    
-    public function likeOrDislike(Request $request){
-        $dl = new DataLayer();
-        
-        if($request->up_down){ //like
-            $dl->likeSong($request->id);
-        }else{ //dislike
-            $dl->dislikeSong($request->id);
-        }
-        $mostLikedSongs = $dl->list10MostLikedSongs();
-        $mostRecentSongs = $dl->list10LatestSongs();
-        return view('front.musicSearch')->with('mostLikedSongs', $mostLikedSongs)->with('mostRecentSongs', $mostRecentSongs);
-    }
+
+//    public function likeOrDislike(Request $request) {
+//        $dl = new DataLayer();
+//
+//        if ($request->up_down) { //like
+//            $dl->likeSong($request->id);
+//        } else { //dislike
+//            $dl->dislikeSong($request->id);
+//        }
+//        $mostLikedSongs = $dl->list10MostLikedSongs();
+//        $mostRecentSongs = $dl->list10LatestSongs();
+//        return view('front.musicSearch')->with('mostLikedSongs', $mostLikedSongs)->with('mostRecentSongs', $mostRecentSongs);
+//    }
 
 //    public function like($id) {
 //        //$user_id = auth()->id();
@@ -84,7 +84,7 @@ class SongController extends Controller {
         // NOT USED 
     }
 
-    public function edit($id) { 
+    public function edit($id) {
         // view with edit form
         // GET method (path "/song/{song}/edit")
         // root name: song.edit
@@ -128,18 +128,33 @@ class SongController extends Controller {
             return view('song.deleteErrorPage');
         }
     }
-    
-    public function ajaxCheckForSong(Request $request){
+
+    public function ajaxCheckForSong(Request $request) {
         // {'found':true/false}
         $dl = new DataLayer();
         $songs = $dl->findSongByFields($request->input('title'), $request->input('author'), $request->input('feat'), $request->input('genre'));
-        if($songs->isEmpty()){
+        if ($songs->isEmpty()) {
             $response = array('found' => false);
-        }else{
+        } else {
             $response = array('found' => true);
         }
         return response()->json($response);
+    }
+    
+    public function ajaxLikeSong(Request $request){
+        $dl = new DataLayer();
         
+        $dl->likeSong($request->input('id'));
+        
+        return response()->json(array('done'=>true));
+    }
+    
+    public function ajaxDislikeSong(Request $request){
+        $dl = new DataLayer();
+        
+        $dl->dislikeSong($request->input('id'));
+        
+        return response()->json(array('done'=>true));
     }
 
 }

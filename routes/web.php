@@ -62,8 +62,11 @@ Route::group(['middleware' => ['auth','lang']], function () {
     
     
    
-    Route::get('/musicSearch/{id}/{up_down?}', ['as' => 'song.likeOrDislike', 'uses' => 'SongController@likeOrDislike']);
-    Route::get('/searchResult/{id}/{up_down?}', ['as' => 'song.likeOrDislike', 'uses' => 'SongController@likeOrDislike']);
+    //Route::get('/musicSearch/{id}/{up_down?}', ['as' => 'song.likeOrDislike', 'uses' => 'SongController@likeOrDislike']);
+    //Route::get('/searchResult/{id}/{up_down?}', ['as' => 'song.likeOrDislike', 'uses' => 'SongController@likeOrDislike']);
+    
+    Route::get("/ajaxLike", "SongController@ajaxLikeSong");
+    Route::get("/ajaxDislike", "SongController@ajaxDislikeSong");
 
     Route::get('/ajaxSong', 'SongController@ajaxCheckForSong');
     

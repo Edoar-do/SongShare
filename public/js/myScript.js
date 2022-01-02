@@ -149,7 +149,97 @@ function checkEmail() {
     // cosa fare se tutto va bene
 
     if (!error) {
+        // TO DO...
+    }
+}
 
+function likeSong(ramo, songID) {
+    if (ramo === 'then') {
+        likeButton = $('#likeThen'+songID);
+        dislikeButton = $('#dislikeThen'+songID);
+        likesTD = $('#likes'+songID);
+        likes = likesTD.html();
+        
+
+        $.ajax({
+            url: '/ajaxLike',
+            type: 'GET',
+            data: {//dati passati in input
+                id: songID
+            },
+            success: function (response) { //dati in risposta dal server
+                if (response.done) {
+                    likesTD.html(parseInt(likes) + 1);
+                    likeButton.css('visibility', 'hidden');
+                    dislikeButton.css('visibility', 'visible');
+                }
+            }
+        });
+    }else{
+        likeButton = $('#likeElse'+songID);
+        dislikeButton = $('#dislikeElse'+songID);
+        likesTD = $('#likes'+songID);
+        likes = likesTD.html();
+
+        $.ajax({
+            url: '/ajaxLike',
+            type: 'GET',
+            data: {//dati passati in input
+                id: songID
+            },
+            success: function (response) { //dati in risposta dal server
+                if (response.done) {
+                    likesTD.html(parseInt(likes) + 1);
+                    likeButton.css('visibility', 'hidden');
+                    dislikeButton.css('visibility', 'visible');
+                }
+            }
+        });
+    }
+}
+
+function dislikeSong(ramo, songID){
+    if (ramo === 'then') {
+        likeButton = $('#likeThen'+songID);
+        dislikeButton = $('#dislikeThen'+songID);
+        likesTD = $('#likes'+songID);
+        likes = likesTD.html();
+
+        $.ajax({
+            url: '/ajaxDislike',
+            type: 'GET',
+            data: {//dati passati in input
+                id: songID
+            },
+            success: function (response) { //dati in risposta dal server
+                if (response.done) {
+                    
+                    likesTD.html(parseInt(likes) - 1);
+                    likeButton.css('visibility', 'visible');
+                    dislikeButton.css('visibility', 'hidden');
+                }
+            }
+        });
+    }else{
+        likeButton = $('#likeElse'+songID);
+        dislikeButton = $('#dislikeElse'+songID);
+        likesTD = $('#likes'+songID);
+        likes = likesTD.html();
+
+        $.ajax({
+            url: '/ajaxDislike',
+            type: 'GET',
+            data: {//dati passati in input
+                id: songID
+            },
+            success: function (response) { //dati in risposta dal server
+                if (response.done) {
+                    likesTD.html(parseInt(likes) - 1);
+                    likeButton.css('visibility', 'visible');
+                    dislikeButton.css('visibility', 'hidden');
+                }
+            }
+        });
     }
 }
 

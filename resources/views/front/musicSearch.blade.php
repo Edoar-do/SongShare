@@ -11,19 +11,19 @@ use SongShare\Http\Controllers\FrontController;
 @section('datatable')
 <script type="text/javascript" class="init">
 
-            $(document).ready(function () {
-                $('table').DataTable(
+    $(document).ready(function () {
+        $('table').DataTable(
                 {
-                    'scrollY' : 200,
-                    'scrollCollapse' : true, 
-                    'info' : false,
-                    'processing' : true,
-                    'paging' : false
-                    
-                });
-            });
+                    'scrollY': 200,
+                    'scrollCollapse': true,
+                    'info': false,
+                    'processing': true,
+                    'paging': false
 
-        </script>
+                });
+    });
+
+</script>
 @endsection
 
 @section('corpo')
@@ -67,16 +67,22 @@ use SongShare\Http\Controllers\FrontController;
                         <td>{{ $song->title }}</td>
                         <td>{{ $song->author }}</td>
                         <td>{{ $song->feat }}</td>
-                        <td>{{ $song->likes }}</td>
+                        <td id="likes{{$song->id}}">{{ $song->likes }}</td>
                         <td>
+                            
+                            
                             @auth
-                                @if(FrontController::checkAlreadyLiked($song->id))
-                                <a class="btn btn-primary" href="{{ route('song.likeOrDislike', ['id' => $song->id, 'up_down' => true]) }}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                                @else
-                                <a class="btn btn-info" href="{{ route('song.likeOrDislike', ['id' => $song->id, 'up_down' => false]) }}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
-                                @endif
+                            @if(FrontController::checkAlreadyLiked($song->id))
+                            <a id="likeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('then', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a id="dislikeThen{{$song->id}}" onclick="event.preventDefault(); sondID = '<?php echo $song->id;?>'; dislikeSong('then', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                            @else
+                            <a id="likeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('else', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a id="dislikeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; dislikeSong('else', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>                            
+                            @endif
                             @endauth
                         </td>
+                        
+                        
                     </tr>
                     @endforeach
                 </tbody>
@@ -115,14 +121,18 @@ use SongShare\Http\Controllers\FrontController;
                         <td>{{ $song->title }}</td>
                         <td>{{ $song->author }}</td>
                         <td>{{ $song->feat }}</td>
-                        <td>{{ $song->likes }}</td>
+                        <td id="likes{{$song->id}}">{{ $song->likes }}</td>
                         <td>
+                            
+                            
                             @auth
-                                @if(FrontController::checkAlreadyLiked($song->id))
-                                <a class="btn btn-primary" href="{{ route('song.likeOrDislike', ['id' => $song->id, 'up_down' => true]) }}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                                @else
-                                <a class="btn btn-info" href="{{ route('song.likeOrDislike', ['id' => $song->id, 'up_down' => false]) }}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
-                                @endif
+                            @if(FrontController::checkAlreadyLiked($song->id))
+                            <a id="likeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('then', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a id="dislikeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; dislikeSong('then', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                            @else
+                            <a id="likeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('else', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a id="dislikeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; dislikeSong('else', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                            @endif
                             @endauth
                         </td>
                     </tr>
