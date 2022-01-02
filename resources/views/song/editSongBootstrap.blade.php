@@ -35,7 +35,7 @@
                 
                 <!-- autore -->
                 <div class="form-group">
-                    <label for="title" class="col-md-2">{{ trans('labels.songAuthor') }}</label>
+                    <label for="author" class="col-md-2">{{ trans('labels.songAuthor') }}</label>
                     <div class="col-sm-10">
                         @if(isset($song->id))
                         <input class="form-control" type="text" id="author" name="author" placeholder="{{ trans('labels.songAuthor') }}" value="{{ $song->author }}">
@@ -48,7 +48,7 @@
                 
                 <!-- feat -->
                 <div class="form-group">
-                    <label for="title" class="col-md-2">{{ trans('labels.songFeat') }}</label>
+                    <label for="feat" class="col-md-2">{{ trans('labels.songFeat') }}</label>
                     <div class="col-sm-10">
                         @if(isset($song->id))
                         <input class="form-control" type="text" id="feat" name="feat" placeholder="{{ trans('labels.songFeat') }}" value="{{ $song->feat }}">
@@ -61,7 +61,7 @@
                 
                 <!-- genere -->
                 <div class="form-group">
-                    <label for="title" class="col-md-2">{{ trans('labels.songGenre') }}</label>
+                    <label for="genre" class="col-md-2">{{ trans('labels.songGenre') }}</label>
                     <div class="col-sm-10">
                         @if(isset($song->id))
                         <input class="form-control" type="text" id="genre" name="genre" placeholder="{{ trans('labels.songGenre') }}" value="{{ $song->genre }}">
@@ -77,11 +77,11 @@
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
                         @if(isset($song->id))
-                        <input type="hidden" name="id" value="{{ $song->id }}"/>
-                        <label for="mySubmit" class="btn btn-primary btn-large btn-block"><span class="glyphicon glyphicon-floppy-save"></span> {{ trans('labels.save') }}</label>
+                        <input type="hidden" name="id" value="{{ $song->id }}"/> 
+                        <label for="mySubmit" class="btn btn-primary btn-lg btn-block login-button"><span class="glyphicon glyphicon-floppy-save"></span> {{ trans('labels.save') }}</label>
                         <input id="mySubmit" type="submit" value="Save" class="hidden" onclick="event.preventDefault(); checkSong('Save')"/>
                         @else
-                        <label for="mySubmit" class="btn btn-primary btn-large btn-block"><span class="glyphicon glyphicon-floppy-save"></span> {{ trans('labels.create') }}</label>
+                        <label for="mySubmit" class="btn btn-primary btn-lg btn-block login-button"><span class="glyphicon glyphicon-floppy-save"></span> {{ trans('labels.create') }}</label>
                         <input id="mySubmit" type="submit" value="Create" class="hidden" onclick="event.preventDefault(); checkSong('Create')"/>
                         @endif
                         <span class="invalid-input" id="existingSong"></span>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <a href="{{ route('song.index') }}" class="btn btn-danger btn-large btn-block"><span class="glyphicon glyphicon-log-out"></span> {{ trans('labels.cancel') }}</a>                         
+                        <a href="{{ route('song.index') }}" class="btn btn-danger btn-lg btn-block btn-danger"><span class="glyphicon glyphicon-log-out"></span> {{ trans('labels.cancel') }}</a>                         
                     </div>
                 </div>
             </form>

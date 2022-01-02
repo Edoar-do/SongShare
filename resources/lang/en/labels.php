@@ -4,6 +4,7 @@
 
 return [
     'songsList' => 'Songs List',
+    'searchInput' => 'Search for songs in our DB',
     'stats' => 'Statistics',
     'threeMostLikedSongs' => 'Your three most appreciated songs',
     'editSongForm' => 'Fill the following form to modify the song fields',

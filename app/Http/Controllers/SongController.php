@@ -2,7 +2,6 @@
 
 namespace SongShare\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use SongShare\DataLayer;
 use Illuminate\Support\Facades\Redirect;

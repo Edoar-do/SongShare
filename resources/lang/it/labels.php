@@ -4,6 +4,7 @@
 
 return [
     'songsList' => 'Elenco delle canzoni',
+    'searchInput' => 'Cerca canzoni nel nostro DB',
     'stats' => 'Statistiche',
     'threeMostLikedSongs' => 'Le tue tre canzoni più apprezzate',
     'editSongForm' => 'Compila la seguente form per modificare la canzone',

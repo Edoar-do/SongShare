@@ -29,7 +29,8 @@ use SongShare\Http\Controllers\FrontController;
 @section('corpo')
 <div class='container'>
     <form class="navbar-form navbar-left" name="search" method="get" action="{{ route('searchResult') }}">
-        <div class="form-group">
+        <label for="searchInput" style='padding-right: 10px; padding-top: 15px;  font-size: 15px'>{{ trans('labels.searchInput') }}</label>
+        <div class="form-group">            
             <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput">
         </div>
         <button type="submit" class="btn btn-default" onclick="event.preventDefault(); checkSearch()"><span class='glyphicon glyphicon-search'aria-hidden="true"></span></button>
@@ -67,22 +68,22 @@ use SongShare\Http\Controllers\FrontController;
                         <td>{{ $song->title }}</td>
                         <td>{{ $song->author }}</td>
                         <td>{{ $song->feat }}</td>
-                        <td id="likes{{$song->id}}">{{ $song->likes }}</td>
+                        <td name="likes{{$song->id}}">{{ $song->likes }}</td>
                         <td>
-                            
-                            
+
+
                             @auth
                             @if(FrontController::checkAlreadyLiked($song->id))
-                            <a id="likeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('then', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                            <a id="dislikeThen{{$song->id}}" onclick="event.preventDefault(); sondID = '<?php echo $song->id;?>'; dislikeSong('then', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                            <a name="likeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id; ?>'; likeSong('then', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a name="dislikeThen{{$song->id}}" onclick="event.preventDefault(); sondID = '<?php echo $song->id; ?>'; dislikeSong('then', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
                             @else
-                            <a id="likeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('else', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                            <a id="dislikeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; dislikeSong('else', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>                            
+                            <a name="likeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id; ?>'; likeSong('else', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a name="dislikeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id; ?>'; dislikeSong('else', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>                            
                             @endif
                             @endauth
                         </td>
-                        
-                        
+
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -121,17 +122,17 @@ use SongShare\Http\Controllers\FrontController;
                         <td>{{ $song->title }}</td>
                         <td>{{ $song->author }}</td>
                         <td>{{ $song->feat }}</td>
-                        <td id="likes{{$song->id}}">{{ $song->likes }}</td>
+                        <td name="likes{{$song->id}}">{{ $song->likes }}</td>
                         <td>
-                            
-                            
+
+
                             @auth
                             @if(FrontController::checkAlreadyLiked($song->id))
-                            <a id="likeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('then', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                            <a id="dislikeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; dislikeSong('then', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                            <a name="likeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id; ?>'; likeSong('then', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a name="dislikeThen{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id; ?>'; dislikeSong('then', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
                             @else
-                            <a id="likeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; likeSong('else', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                            <a id="dislikeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id;?>'; dislikeSong('else', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                            <a name="likeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id; ?>'; likeSong('else', songID);" style="visibility: hidden" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            <a name="dislikeElse{{$song->id}}" onclick="event.preventDefault(); songID = '<?php echo $song->id; ?>'; dislikeSong('else', songID);" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-down"></span></a>
                             @endif
                             @endauth
                         </td>

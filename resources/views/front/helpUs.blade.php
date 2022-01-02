@@ -5,7 +5,7 @@
 @endsection
 
 @section('corpo')
-<form action="TODO" method="POST"> <!-- TO DO -->
+<form action="{{route('helpUsForm')}}" method="POST" name='helpUsForm'>
     <div class="form-group">
         <label for="email"><br>E-mail:</label>
         <input type="email" class="form-control" id="email" placeholder="name@example.com">

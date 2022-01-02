@@ -149,17 +149,16 @@ function checkEmail() {
     // cosa fare se tutto va bene
 
     if (!error) {
-        // TO DO...
+        $("form[name=helpUsForm]").submit();
     }
 }
 
 function likeSong(ramo, songID) {
     if (ramo === 'then') {
-        likeButton = $('#likeThen'+songID);
-        dislikeButton = $('#dislikeThen'+songID);
-        likesTD = $('#likes'+songID);
-        likes = likesTD.html();
         
+        likeButtons = document.querySelectorAll("a[name=likeThen" + songID + "]");
+        dislikeButtons = document.querySelectorAll("a[name=dislikeThen" + songID + "]");
+        likesTDs = document.querySelectorAll("td[name=likes" + songID + "]");        
 
         $.ajax({
             url: '/ajaxLike',
@@ -169,17 +168,23 @@ function likeSong(ramo, songID) {
             },
             success: function (response) { //dati in risposta dal server
                 if (response.done) {
-                    likesTD.html(parseInt(likes) + 1);
-                    likeButton.css('visibility', 'hidden');
-                    dislikeButton.css('visibility', 'visible');
+                    likesTDs.forEach(function(td){
+                        td.textContent = (parseInt(td.textContent)+1);
+                    });
+                    likeButtons.forEach(function(button){
+                        button.style.visibility = 'hidden';
+                    });
+                    dislikeButtons.forEach(function(button){
+                        button.style.visibility = 'visible';
+                    });
                 }
             }
         });
     }else{
-        likeButton = $('#likeElse'+songID);
-        dislikeButton = $('#dislikeElse'+songID);
-        likesTD = $('#likes'+songID);
-        likes = likesTD.html();
+        
+        likeButtons = document.querySelectorAll("a[name=likeElse" + songID + "]");
+        dislikeButtons = document.querySelectorAll("a[name=dislikeElse" + songID + "]");
+        likesTDs = document.querySelectorAll("td[name=likes" + songID + "]");        
 
         $.ajax({
             url: '/ajaxLike',
@@ -189,9 +194,15 @@ function likeSong(ramo, songID) {
             },
             success: function (response) { //dati in risposta dal server
                 if (response.done) {
-                    likesTD.html(parseInt(likes) + 1);
-                    likeButton.css('visibility', 'hidden');
-                    dislikeButton.css('visibility', 'visible');
+                    likesTDs.forEach(function(td){
+                        td.textContent = (parseInt(td.textContent)+1);
+                    });
+                    likeButtons.forEach(function(button){
+                        button.style.visibility = 'hidden';
+                    });
+                    dislikeButtons.forEach(function(button){
+                        button.style.visibility = 'visible';
+                    });
                 }
             }
         });
@@ -200,10 +211,10 @@ function likeSong(ramo, songID) {
 
 function dislikeSong(ramo, songID){
     if (ramo === 'then') {
-        likeButton = $('#likeThen'+songID);
-        dislikeButton = $('#dislikeThen'+songID);
-        likesTD = $('#likes'+songID);
-        likes = likesTD.html();
+        
+        likeButtons = document.querySelectorAll("a[name=likeThen" + songID + "]");
+        dislikeButtons = document.querySelectorAll("a[name=dislikeThen" + songID + "]");
+        likesTDs = document.querySelectorAll("td[name=likes" + songID + "]");        
 
         $.ajax({
             url: '/ajaxDislike',
@@ -213,18 +224,23 @@ function dislikeSong(ramo, songID){
             },
             success: function (response) { //dati in risposta dal server
                 if (response.done) {
-                    
-                    likesTD.html(parseInt(likes) - 1);
-                    likeButton.css('visibility', 'visible');
-                    dislikeButton.css('visibility', 'hidden');
+                    likesTDs.forEach(function(td){
+                        td.textContent = (parseInt(td.textContent)-1);
+                    });
+                    likeButtons.forEach(function(button){
+                        button.style.visibility = 'visible';
+                    });
+                    dislikeButtons.forEach(function(button){
+                        button.style.visibility = 'hidden';
+                    });
                 }
             }
         });
     }else{
-        likeButton = $('#likeElse'+songID);
-        dislikeButton = $('#dislikeElse'+songID);
-        likesTD = $('#likes'+songID);
-        likes = likesTD.html();
+        
+        likeButtons = document.querySelectorAll("a[name=likeElse" + songID + "]");
+        dislikeButtons = document.querySelectorAll("a[name=dislikeElse" + songID + "]");
+        likesTDs = document.querySelectorAll("td[name=likes" + songID + "]");        
 
         $.ajax({
             url: '/ajaxDislike',
@@ -234,9 +250,15 @@ function dislikeSong(ramo, songID){
             },
             success: function (response) { //dati in risposta dal server
                 if (response.done) {
-                    likesTD.html(parseInt(likes) - 1);
-                    likeButton.css('visibility', 'visible');
-                    dislikeButton.css('visibility', 'hidden');
+                    likesTDs.forEach(function(td){
+                        td.textContent = (parseInt(td.textContent)-1);
+                    });
+                    likeButtons.forEach(function(button){
+                        button.style.visibility = 'visible';
+                    });
+                    dislikeButtons.forEach(function(button){
+                        button.style.visibility = 'hidden';
+                    });
                 }
             }
         });

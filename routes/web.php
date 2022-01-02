@@ -34,6 +34,8 @@ Route::group(['middleware' => ['lang']], function () {
     Auth::routes();
     
     Route::get('/ajaxSearch', 'FrontController@ajaxCheckSearch');
+    
+    Route::get('/helpUsForm', 'FrontController@sendHelpUsForm');
 });
 
 // Authentication Routes...
