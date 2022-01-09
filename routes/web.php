@@ -22,7 +22,7 @@ Route::group(['middleware' => ['lang']], function () {
     Route::get('/aboutMe', ['as' => 'aboutMe', 'uses' => 'FrontController@getAboutMe']);
     Route::get('/musicSearch', ['as' => 'musicSearch', 'uses' => 'FrontController@getMusicSearch']);
     Route::get('/searchResult', ['as' => 'searchResult', 'uses' => 'FrontController@getSearchResult']);
-    Route::get('/helpUs', ['as' => 'helpUs', 'uses' => 'FrontController@getHelpUs']);
+    
 //    Route::get('/user/login', ['as' => 'user.login',
 //        'uses' => 'AuthController@authentication']);
 //    Route::post('/user/login', ['as' => 'user.login',
@@ -35,7 +35,7 @@ Route::group(['middleware' => ['lang']], function () {
     
     Route::get('/ajaxSearch', 'FrontController@ajaxCheckSearch');
     
-    Route::get('/helpUsForm', 'FrontController@sendHelpUsForm');
+    Route::get('/helpUsForm', 'FrontController@sendHelpUsForm')->name('helpUsForm');
 });
 
 // Authentication Routes...
@@ -54,6 +54,9 @@ Route::group(['middleware' => ['lang']], function () {
 //$this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::group(['middleware' => ['auth','lang']], function () {
+    
+    Route::get('/helpUs', ['as' => 'helpUs', 'uses' => 'FrontController@getHelpUs']);
+    
     Route::resource('song', 'SongController');
     Route::get('/song/{id}/destroy', ['as' => 'song.destroy',
         'uses' => 'SongController@destroy']);

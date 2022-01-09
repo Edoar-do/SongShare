@@ -5,6 +5,7 @@
 return [
     'songsList' => 'Songs List',
     'searchInput' => 'Search for songs in our DB',
+    'checkPwBeforeSending' => "Don't forget to insert your password: ",
     'stats' => 'Statistics',
     'threeMostLikedSongs' => 'Your three most appreciated songs',
     'editSongForm' => 'Fill the following form to modify the song fields',
@@ -14,7 +15,7 @@ return [
     'trySearchEngine' => 'Try our search engine to discover previously shared songs',
     'searchMusic' => 'Search Music',
     'helpUsImprove' => 'Help Us Improve, give us a feedback',
-    'howToImprove' => 'How can we improve?',
+    'howToImprove' => 'tell us how we can improve',
     'mostLikedSongs' => 'The ten most popular songs:',
     'songTitle' => 'Title',
     'songAuthor' => 'Author',

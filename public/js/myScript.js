@@ -119,36 +119,18 @@ function checkSearch() {
     }
 }
 
-function checkEmail() {
+function checkBeforeSending(realPw){
+    textArea = $('#text-area');
+    textArea_msg = $('#invalid-text');
     var error = false;
-    email = $("#email");
-    email_msg = $("#invalid-email");
-
-    var regexEmail = /^([a-z]+(\.[a-z]+)*@[a-z]+(\.[a-z]+)*\.[a-z]{2,3})$/i;
-    var regexUsername = /^([a-z]+(\.[a-z]+)*@)/i;
-    var regexDomain = /(@[a-z]+(\.[a-z]+)*\.[a-z]{2,3})$/i;
-
-    if (email.val().trim() === "") {
-        email_msg.html("Emai must not be empty");
-        email.focus();
+    
+    if(textArea.val().trim() === ""){
+        textArea.focus();
         error = true;
-    } else if (!regexUsername.test(email.val())) {
-        email_msg.html("Invalid username: only dot-separated words ending with @");
-        email.focus();
-        error = true;
-    } else if (!regexDomain.test(email.val())) {
-        email_msg.html("Invalid domain name: only dot-separated words starting with @");
-        email.focus();
-        error = true;
-    } else if (!regexEmail.test(email.val())) {
-        email_msg.html("Only one @ allowed");
-        email.focus();
-        error = true;
+        textArea_msg.html('Text Area must not be empty')        
     }
-
-    // cosa fare se tutto va bene
-
-    if (!error) {
+    
+    if(!error){
         $("form[name=helpUsForm]").submit();
     }
 }

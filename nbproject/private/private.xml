@@ -4,12 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/MAMP/htdocs/MioProgetto/public/js/myScript.js</file>
-            <file>file:/C:/MAMP/htdocs/MioProgetto/app/Http/Controllers/SongController.php</file>
-            <file>file:/C:/MAMP/htdocs/MioProgetto/resources/views/front/musicSearch.blade.php</file>
-            <file>file:/C:/MAMP/htdocs/MioProgetto/resources/views/front/searchResult.blade.php</file>
+            <file>file:/C:/MAMP/htdocs/MioProgetto/app/Http/Controllers/FrontController.php</file>
             <file>file:/C:/MAMP/htdocs/MioProgetto/resources/views/front/helpUs.blade.php</file>
-            <file>file:/C:/MAMP/htdocs/MioProgetto/routes/web.php</file>
-            <file>file:/C:/MAMP/htdocs/MioProgetto/app/DataLayer.php</file>
         </group>
     </open-files>
 </project-private>

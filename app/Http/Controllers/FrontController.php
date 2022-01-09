@@ -2,6 +2,8 @@
 
 namespace SongShare\Http\Controllers;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
 use SongShare\DataLayer;
@@ -39,7 +41,7 @@ class FrontController extends Controller
     }
     
     public function getHelpUs() {        
-        return view('front.helpUs');
+        return view('front.helpUs')->with('aftermail', null);
     }
     
     public static function checkAlreadyLiked($song_id){
@@ -57,5 +59,43 @@ class FrontController extends Controller
             $response = array('found' => true);
         }
         return response()->json($response);
+    }
+    
+    public function sendHelpUsForm(Request $request){
+        $email = Auth::user()->email;
+        $textArea = $request->input('text-area');
+        try{
+            $client = new Client([
+                // URI da contattare
+                'base_uri' => 'http://localhost:8081',
+                'timeout'  => 60.0,
+            ]);
+
+            $response = $client->request('GET', '', [
+                'query' => ['email' => $email, 'text' => $textArea],
+                'headers' => ['source' => 'SongShare', 'content-type' => 'text/html; charset=utf-8', 'Accept' => 'application/json']
+            ]);
+
+            $result = json_decode($response->getBody());
+
+
+            // DA FINIRE: PRENDERE SPUNTO DAL SERVIZIO DI MARCO
+            if ($result->result == "positive") {
+                echo "<script>";
+                echo "alert('Mail sent successfully');";
+                echo "</script>";
+                return redirect()->back();
+            }else{
+                echo "<script>";
+                echo "alert('Mail sending failed');";
+                echo "</script>";
+                return redirect()->back();
+            }
+        }catch(\GuzzleHttp\Exception\ConnectException $e){
+            echo "<script>";
+            echo "alert('Something went wrong...');";
+            echo "</script>";
+            return redirect()->back();
+        }
     }
 }

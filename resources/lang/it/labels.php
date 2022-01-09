@@ -5,6 +5,7 @@
 return [
     'songsList' => 'Elenco delle canzoni',
     'searchInput' => 'Cerca canzoni nel nostro DB',
+    'checkPwBeforeSending' => "Non dimenticarti di inserire la tua password: ",
     'stats' => 'Statistiche',
     'threeMostLikedSongs' => 'Le tue tre canzoni più apprezzate',
     'editSongForm' => 'Compila la seguente form per modificare la canzone',
@@ -14,7 +15,7 @@ return [
     'trySearchEngine' => 'Prova il nostro motore di ricerca per scoprire le canzoni condivise',
     'searchMusic' => 'Ricerca musica',
     'helpUsImprove' => 'Aiutaci a migliorare, lasciaci un giudizio',
-    'howToImprove' => 'Come possiamo migliorare?',
+    'howToImprove' => 'dicci come possiamo migliorare',
     'mostLikedSongs' => 'Le dieci canzoni più apprezzate:',
     'songTitle' => 'Titolo',
     'songAuthor' => 'Autore',

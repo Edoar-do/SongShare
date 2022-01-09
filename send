@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""
+A python script for http server
+"""
+import json, smtplib as sl, ssl
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from email.message import EmailMessage
+
+def main():
+    print('Avvio del server...')
+    # Specifichiamo le impostazioni del server
+    # Scegliamo la porta 8081 (per la porta 80 sono necessari i permessi di root)
+    server_address = ('127.0.0.1', 8081)
+    httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
+    print('Server in esecuzione...')
+    httpd.serve_forever()
+
+class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
+    # Implementiamo il metodo che risponde alle richieste GET
+    def do_GET(self):
+        if self.headers.__contains__('source') and self.headers['source'] == 'SongShare': #autenticazione sito presso server
+            params = self.path[2:].split('&')        
+            # response code
+            self.send_response(200)
+            # headers
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            
+            email = params[0].split('=')[1].replace('%40', '@')
+            text = params[1].split('=')[1]
+
+            #print(email, text)
+
+            if sendMail(email, text):
+                self.wfile.write((json.dumps({'result': 'positive'})).encode())
+            else:
+                self.wfile.write((json.dumps({'result': 'negative'})).encode())
+            return
+        else: # autenticazione fallita
+            self.send_response(403)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write((json.dumps({'result': 'negative'})).encode())
+            return
+
+
+def sendMail(email, text):
+    sender = 'example@gmail.com'
+    description = text
+    msg = EmailMessage()
+    msg.set_content(description)
+    msg['Subject'] = 'SongShare: suggestion received'
+    msg['From'] = f"Python SMTP <{sender}>"
+    msg['To'] = email
+
+    try:
+        server = sl.SMTP(host='smtp.gmail.com', port=587)
+        print('Mail server created successfully')
+        server.ehlo()
+        server.starttls()
+        print('TLS started successfully')
+        server.login(sender, 'password') #may be necessary a specific application password released from your gmail account
+        print('Logged in')
+        server.send_message(msg=msg)
+        print('Mail message sent successfully')
+        print('Server closing...')
+        server.close()
+        return True
+    except Exception as e:
+        print(e.args)
+        return False
+
+
+if __name__ == "__main__":
+    main()
