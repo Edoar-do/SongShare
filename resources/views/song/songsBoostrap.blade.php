@@ -7,39 +7,37 @@
 @section('datatable')
 <script type="text/javascript" class="init">
 
-            $(document).ready(function () {
-                $('#userSongsTable').DataTable(
+    $(document).ready(function () {
+        $('#userSongsTable').DataTable(
                 {
-                    'scrollY' : 200,
-                    'scrollCollapse' : true, 
-                    'processing' : true
-                    
-                });
-                
-                $('#user3MostLikedSongsTable').DataTable({
-                    'scrollY' : 200,
-                    'scrollCollapse' : true,
-                    'paging': false,
-                    'info' : false,
-                    'searching' : false,
-                    'processing' : true
-                });
-            });
+                    'scrollY': 200,
+                    'scrollCollapse': true,
+                    'processing': true
 
-        </script>
+                });
+
+        $('#user3MostLikedSongsTable').DataTable({
+            'scrollY': 200,
+            'scrollCollapse': true,
+            'paging': false,
+            'info': false,
+            'searching': false,
+            'processing': true
+        });
+    });
+
+</script>
 @endsection
 
 @section('corpo')
 <div class="container">
-    <div class="row">
-        <div class="col-md-offset-10 col-xs-6">
-            <p>
-                <br><a class="btn btn-success" href="{{ route('song.create') }}"><span class="glyphicon glyphicon-plus"></span> {{ trans('labels.createNewSong') }}</a>
-            </p>
-        </div>
+    <div class="row" >
+        <br><a class="btn btn-success" href="{{ route('song.create') }}"><span style='padding-right: 10px'  class="glyphicon glyphicon-plus"></span> {{ trans('labels.createNewSong') }}</a>
+        <br><br><a class="btn btn-primary" href="{{ route('randomSong') }}"><span style='padding-right: 10px'  class="glyphicon glyphicon-gift"></span> {{ trans('labels.dailySong') }}</a>
+        <label style="padding-left: 20px; font-size: 20px;"> {{ $randomSong }} </label>
     </div>
-</div>
-<div class="container">
+    <!--</div>-->
+    <!--<div class="container">-->
     <header class="header-sezione">
         <h1>@lang('labels.mySongs') <span class='glyphicon glyphicon-music'></span></h1>
     </header>

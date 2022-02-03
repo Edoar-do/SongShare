@@ -27,15 +27,18 @@ use SongShare\Http\Controllers\FrontController;
 @endsection
 
 @section('corpo')
+
 <div class='container'>
-    <form class="navbar-form navbar-left" name="search" method="get" action="{{ route('searchResult') }}">
-        <label for="searchInput" style='padding-right: 10px; padding-top: 15px;  font-size: 15px'>{{ trans('labels.searchInput') }}</label>
-        <div class="form-group">            
-            <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput">
-        </div>
-        <button type="submit" class="btn btn-default" onclick="event.preventDefault(); checkSearch()"><span class='glyphicon glyphicon-search'aria-hidden="true"></span></button>
-        <span class="invalid-input" id="invalid-search"></span>
-    </form>
+    <div class='row'>
+        <form class="navbar-form navbar-left" name="search" method="get" action="{{ route('searchResult') }}">
+            <label  for="searchInput" id='searchLabel'>{{ trans('labels.searchInput') }}</label>
+            <div class="form-group" >            
+                <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput">
+            </div>
+            <button  type="submit" class="btn btn-default" onclick="event.preventDefault(); checkSearch()"><span class='glyphicon glyphicon-search'aria-hidden="true"></span></button>
+            <span class="invalid-input" id="invalid-search"></span>
+        </form>
+    </div>
 </div>
 <!-- Most liked songs -->
 <div class="container">

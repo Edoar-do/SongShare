@@ -5,6 +5,8 @@ A python script for http server
 import json, smtplib as sl, ssl
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from email.message import EmailMessage
+import urllib.parse
+
 
 def main():
     print('Avvio del server...')
@@ -26,10 +28,10 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.end_headers()
             
-            email = params[0].split('=')[1].replace('%40', '@')
-            text = params[1].split('=')[1]
-
-            #print(email, text)
+            email = urllib.parse.unquote(params[0].split('=')[1])
+            text = urllib.parse.unquote(params[1].split('=')[1])
+            
+            #print(email + '\n' + text)
 
             if sendMail(email, text):
                 self.wfile.write((json.dumps({'result': 'positive'})).encode())
@@ -43,7 +45,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write((json.dumps({'result': 'negative'})).encode())
             return
 
-
+    
 def sendMail(email, text):
     sender = 'example@gmail.com'
     description = text
@@ -59,7 +61,7 @@ def sendMail(email, text):
         server.ehlo()
         server.starttls()
         print('TLS started successfully')
-        server.login(sender, 'password') #may be necessary a specific application password released from your gmail account
+        server.login(sender, 'password')
         print('Logged in')
         server.send_message(msg=msg)
         print('Mail message sent successfully')

@@ -3,6 +3,8 @@
 body {
     background-color: #fcfcfc;
     font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 100%;
+    min-height: 100%;
 }
 
 /* Classe per applicare un margine inferiore */
@@ -252,7 +254,8 @@ body {
 
 .btn {
     border: 0;
-    border-radius: 0;
+    border-radius: 10px;
+    font-size: 15px;
 }
 .btn:focus {
     outline: 0;
@@ -608,3 +611,17 @@ footer a, footer a:hover {color: #5cb85c;}
 .panel-default > .panel-footer + .panel-collapse .panel-body {
     border-bottom-color: #dddddd;
 }
+
+/* stile per label di ricerca */
+
+#searchLabel{
+    padding: 20px 5px 15px 0px;
+    font-size: 22px;
+}
+
+/* stile per label mail */
+#labelMail{
+    padding: 0px 0px 10px 0px;
+    font-size: 25px;
+}
+

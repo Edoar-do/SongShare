@@ -106,4 +106,8 @@ class DataLayer {
         return $users[0]->id;
     }
 
+    public function allSongs() {
+        return Song::all();
+    }
+
 }

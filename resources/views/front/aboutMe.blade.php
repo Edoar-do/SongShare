@@ -13,7 +13,7 @@
     </header>
 </div>
 
-<div class="container">                
+<div  class="container">                
     <div class="col-sm-9">
         <div class="box-lavoro-evidenza">
             <p>@lang('labels.aboutMeMSG')</p>
@@ -29,7 +29,24 @@
                 <img src="img/ingegneria.jfif" class="img-thumbnail img-responsive">
             </div>
         </div><!-- /.col-sm-4 -->
-    </div>                
+    </div> 
+
+    <div class="col-sm-9">
+        <div class="box-lavoro-evidenza">
+            <p>@lang('labels.disneyMsg')</p>
+            <blockquote>
+                <p>Mola mia</p>
+                <small>[@lang('labels.latinProverb')]</small>
+            </blockquote>
+        </div>
+    </div><!-- /.col-sm-8 -->
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="box-lavoro-evidenza">
+                <img src="img/disneyCastle.jfif" class="img-thumbnail img-responsive">
+            </div>
+        </div><!-- /.col-sm-4 -->
+    </div>               
 
     <!-- Footer -->
     <footer class="bg-white footer">

@@ -5,6 +5,7 @@ namespace SongShare\Http\Controllers;
 use Illuminate\Http\Request;
 use SongShare\DataLayer;
 use Illuminate\Support\Facades\Redirect;
+use GuzzleHttp\Client;
 
 class SongController extends Controller {
 
@@ -17,7 +18,7 @@ class SongController extends Controller {
         $userID = auth()->id();
         $songs_list = $dl->listUserSongs($userID);
         $threeMostLikedSongs = $dl->listUser3MostLikedSongs($userID);
-        return view('song.songsBoostrap')->with('songList', $songs_list)->with('threeMostLikedSongs', $threeMostLikedSongs);
+        return view('song.songsBoostrap')->with('songList', $songs_list)->with('threeMostLikedSongs', $threeMostLikedSongs)->with('randomSong', '');
     }
 
 //    public function likeOrDislike(Request $request) {
@@ -154,6 +155,54 @@ class SongController extends Controller {
         $dl->dislikeSong($request->input('id'));
         
         return response()->json(array('done'=>true));
+    }
+    
+    
+    public function randomSong(){
+        $userID = auth()->id();
+        $dl = new DataLayer();
+        $songs = $dl->allSongs();
+        $songs_list = $dl->listUserSongs($userID);
+        $threeMostLikedSongs = $dl->listUser3MostLikedSongs($userID);
+        
+        try{
+            $client = new Client([
+                // URI da contattare
+                'base_uri' => 'http://localhost:8082',
+                'timeout'  => 60.0,
+            ]);
+
+             $response = $client->request('GET', '', [
+                 'query' => ['userID' => $userID, 'songs' => json_encode($songs)],
+                 'headers' => ['source' => 'SongShare', 'Accept' => 'application/json']
+            ]);
+
+            $result = json_decode($response->getBody());
+            if ($result->result == "negative") {
+                return view('song.songsBoostrap')->with('songList', $songs_list)->
+                with('threeMostLikedSongs', $threeMostLikedSongs)->with('randomSong', '');
+            }else{
+                $toOutput = $result->result;
+                $toOutput = str_replace('{', '', $toOutput);
+                $toOutput = str_replace('}', '', $toOutput);
+                $toOutput = str_replace('"', '', $toOutput);
+                $keyValues = explode(',', $toOutput);
+                foreach ($keyValues as $keyValue) {
+                    $keyValue = ucfirst($keyValue);
+                }
+                $final = " | ";
+                foreach ($keyValues as $keyValue) {
+                    $final = $final . $keyValue . ' | ';
+                }
+
+                return view('song.songsBoostrap')->with('songList', $songs_list)->
+                with('threeMostLikedSongs', $threeMostLikedSongs)->with('randomSong', $final);
+            }
+        }catch(\GuzzleHttp\Exception\ConnectException $e){
+            return view('song.songsBoostrap')->with('songList', $songs_list)->
+                with('threeMostLikedSongs', $threeMostLikedSongs)->with('randomSong', 'Something went wrong...');
+        }
+        
     }
 
 }

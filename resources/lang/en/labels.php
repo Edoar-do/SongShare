@@ -4,6 +4,11 @@
 
 return [
     'songsList' => 'Songs List',
+    'dailySong' => 'Random Song',
+    'disneyMsg' => 'Each one of us would like the engineering faculty to be like Dinsey world but it is not so.
+    It is a dark, cold world, insensitive to human heat, a place forgotten by God and the men... but not all the them.
+    Some chose to walk in there in order to built a better world. That is what pushed me to make SongShare',
+    'send' => '    Send',
     'searchInput' => 'Search for songs in our DB',
     'checkPwBeforeSending' => "Don't forget to insert your password: ",
     'stats' => 'Statistics',

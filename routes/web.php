@@ -34,8 +34,6 @@ Route::group(['middleware' => ['lang']], function () {
     Auth::routes();
     
     Route::get('/ajaxSearch', 'FrontController@ajaxCheckSearch');
-    
-    Route::get('/helpUsForm', 'FrontController@sendHelpUsForm')->name('helpUsForm');
 });
 
 // Authentication Routes...
@@ -56,6 +54,7 @@ Route::group(['middleware' => ['lang']], function () {
 Route::group(['middleware' => ['auth','lang']], function () {
     
     Route::get('/helpUs', ['as' => 'helpUs', 'uses' => 'FrontController@getHelpUs']);
+    Route::get('/helpUsForm', 'FrontController@sendHelpUsForm')->name('helpUsForm');
     
     Route::resource('song', 'SongController');
     Route::get('/song/{id}/destroy', ['as' => 'song.destroy',
@@ -64,6 +63,8 @@ Route::group(['middleware' => ['auth','lang']], function () {
         'uses' => 'SongController@confirmDestroy']);
     Route::get('/song/{id}/update', ['as' => 'song.update',
         'uses' => 'SongController@update']);
+    
+    Route::get('/randomSong', 'SongController@randomSong')->name('randomSong');
     
     
    

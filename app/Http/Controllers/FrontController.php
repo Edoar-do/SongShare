@@ -41,7 +41,7 @@ class FrontController extends Controller
     }
     
     public function getHelpUs() {        
-        return view('front.helpUs')->with('aftermail', null);
+        return view('front.helpUs')->with('message', null);
     }
     
     public static function checkAlreadyLiked($song_id){
@@ -71,31 +71,19 @@ class FrontController extends Controller
                 'timeout'  => 60.0,
             ]);
 
-            $response = $client->request('GET', '', [
-                'query' => ['email' => $email, 'text' => $textArea],
-                'headers' => ['source' => 'SongShare', 'content-type' => 'text/html; charset=utf-8', 'Accept' => 'application/json']
+             $response = $client->request('GET', '', [
+                 'query' => ['email' => $email, 'text' => $textArea],
+                 'headers' => ['source' => 'SongShare', 'content-type' => 'text/html; charset=utf-8', 'Accept' => 'application/json']
             ]);
 
             $result = json_decode($response->getBody());
-
-
-            // DA FINIRE: PRENDERE SPUNTO DAL SERVIZIO DI MARCO
             if ($result->result == "positive") {
-                echo "<script>";
-                echo "alert('Mail sent successfully');";
-                echo "</script>";
-                return redirect()->back();
+                return view('front.helpUs')->with('message', 'Mail sent successfully');
             }else{
-                echo "<script>";
-                echo "alert('Mail sending failed');";
-                echo "</script>";
-                return redirect()->back();
+                return view('front.helpUs')->with('message', 'Mail sending failed');
             }
         }catch(\GuzzleHttp\Exception\ConnectException $e){
-            echo "<script>";
-            echo "alert('Something went wrong...');";
-            echo "</script>";
-            return redirect()->back();
+            return view('front.helpUs')->with('message', 'Something went wrong...');
         }
     }
 }

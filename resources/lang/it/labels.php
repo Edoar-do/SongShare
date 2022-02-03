@@ -4,6 +4,12 @@
 
 return [
     'songsList' => 'Elenco delle canzoni',
+    'dailySong' => 'Canzone casuale',
+    'disneyMsg' => 'Tutti noi che vorremmo che la facoltà di ingneria fosse come il mondo disney ma la
+    la verità è che è posto buio, freddo, insensibile al calore umano, è un posto dimenticato da Dio e dagli uomini... 
+    ma per il quale certi Uomini si avventurano nel tentativo di costruire un mondo migliore. Questo è quello che mi ha spinto
+    a creare Songshare',
+    'send' => '    Invia',
     'searchInput' => 'Cerca canzoni nel nostro DB',
     'checkPwBeforeSending' => "Non dimenticarti di inserire la tua password: ",
     'stats' => 'Statistiche',
